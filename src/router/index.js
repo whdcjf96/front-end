@@ -7,17 +7,17 @@ Vue.use(VueRouter)
 
 const routes = [
   //  /, /tutorials 메뉴를 클릭하면 TutorialsList.vue 로딩
-  // {
-  //   path: '/',
-  //   alias: '/tutorials',
-  //   name: 'tutorials',
-  //   component: () => import('@/components/TutorialsList')
-  // },
-  // {
-  //   path: '/tutorials/:id',
-  //   name: 'tutorials-detail',
-  //   component: () => import('@/components/Tutorial')
-  // },
+  {
+    path: '/',
+    alias: '/tutorials',
+    name: 'tutorials',
+    component: () => import('@/components/TutorialsList')
+  },
+  {
+    path: '/tutorials/:id',
+    name: 'tutorials-details',
+    component: () => import('@/components/Tutorial')
+  },
   {
     path: '/add',
     name: 'add',
