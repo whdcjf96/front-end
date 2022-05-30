@@ -8,8 +8,7 @@ Vue.use(VueRouter)
 const routes = [
   //  /, /tutorials 메뉴를 클릭하면 TutorialsList.vue 로딩
   {
-    path: '/',
-    alias: '/tutorials',
+    path: '/tutorials',
     name: 'tutorials',
     component: () => import('@/components/TutorialsList')
   },
@@ -22,12 +21,18 @@ const routes = [
     path: '/add',
     name: 'add',
     component: () => import('@/components/AddTutorial')
+  },
+  {
+    path: '/complain',
+    name: 'complain',
+    component: () => import('@/views/ComplainView')
+  },
+  {
+    path: '/',
+    alias:'/home',
+    name: 'home',
+    component: () => import('@/views/HomeView')
   }
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  // }
 ]
 
 const router = new VueRouter({
