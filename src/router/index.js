@@ -28,6 +28,11 @@ const routes = [
     component: () => import('@/views/ComplainView')
   },
   {
+    path: '/upload',
+    name: 'upload',
+    component: () => import('@/components/UploadImage')
+  },
+  {
     path: '/',
     alias:'/home',
     name: 'home',

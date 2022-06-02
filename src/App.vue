@@ -28,6 +28,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <router-link to="/tutorials" class="dropdown-item">Totorials</router-link>
             <router-link to="/add" class="dropdown-item">Add</router-link>
+            <router-link to="/upload" class="dropdown-item">Upload</router-link>
 <!--            <div class="dropdown-divider"></div>-->
 <!--            <a class="dropdown-item" href="#">Something else here</a>-->
           </div>
