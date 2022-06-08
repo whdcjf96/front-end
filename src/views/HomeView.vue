@@ -1,160 +1,57 @@
 <template>
-  <div id="row justify-content-md-center">
-    <nav id="main-navigation">
-      <div class="pull-left">
-        <ul class="outer-menu">
-          <!-- 대메뉴 -->
-          <li class="outer-menu-item"
-              v-on:mouseover="isShow= true"
-              v-on:mouseleave="isShow= false"
-          >
-            <span class="menu-title">About</span>
-            <!-- 소메뉴 -->
-            <ul class="inner-menu" v-if="isShow">
-              <li class="inner-menu-item">
-                <router-link to="/">Home</router-link>
-              </li>
-              <li class="inner-menu-item">
-                <router-link to="/complain">Complain</router-link>
-              </li>
-              <li class="inner-menu-item">
-                <router-link to="/register">회원가입</router-link>
-              </li>
-            </ul>
-          </li>
-          <!-- 대메뉴 -->
-          <li class="outer-menu-item"
-              v-on:mouseover="isShow02= true"
-              v-on:mouseleave="isShow02= false"
-          >
-            <span class="menu-title">상품정보</span>
-            <!-- 소메뉴 -->
-            <ul class="inner-menu" v-if="isShow02">
-              <li class="inner-menu-item">
-                <router-link to="/infocup">컵소개</router-link>
-              </li>
-            </ul>
-          </li>
-          <!-- 대메뉴 -->
-          <li class="outer-menu-item"
-              v-on:mouseover="isShow03= true"
-              v-on:mouseleave="isShow03= false"
-          >
-            <span class="menu-title">찾아오시는길</span>
-            <!-- 소메뉴 -->
-            <ul class="inner-menu" v-if="isShow03">
-              <li class="inner-menu-item">
-                <router-link to="#">데이터</router-link>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div class="pull-right">
-        <div class="search-bar">
-          <form>
-            <input type="text" class="input-search"/>
-            <input type="submit" class="input-search-submit" value="검색"/>
-          </form>
-        </div>
-      </div>
+  <div id="page-top">
+    <!-- Navigation-->
+    <a class="menu-toggle rounded mt-5" href="#"><i class="fas fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li class="sidebar-brand"><a href="#page-top">Start Bootstrap</a></li>
+        <li class="sidebar-nav-item"><a href="#page-top">Home</a></li>
+        <li class="sidebar-nav-item"><a href="#about">About</a></li>
+        <li class="sidebar-nav-item"><a href="#services">Services</a></li>
+        <li class="sidebar-nav-item"><a href="#portfolio">Portfolio</a></li>
+        <li class="sidebar-nav-item"><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
-    <div class="col-me-8">
-      <article>
-        <div class="article-header">
-          <h1 class="article-title">HTML5 개요와 활용</h1>
-          <p class="article-date">2013년 02월 14일</p>
-        </div>
-        <div class="article-body">
-          <img src="@/assets/images/macintosh.png"/>
-          <br/>
-          <br/>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            commodo justo ac lorem pretium vitae rhoncus lectus ullamcorper.
-            Aliquam facilisis euismod diam sollicitudin commodo. Nunc sagittis
-            sapien venenatis lorem vestibulum cursus pellentesque mi sodales.
-            Donec pellentesque hendrerit turpis, vitae tempor nibh ultricies at.
-            Aliquam consequat rutrum erat, vel sodales tellus sagittis at. Proin
-            sollicitudin augue eu augue vehicula vitae bibendum odio porta.
-            Aliquam elit arcu, venenatis in imperdiet ut, scelerisque non dolor.
-            Donec in vulputate tortor. Fusce egestas rutrum mi quis ultricies.
-            Vivamus blandit augue ac felis ullamcorper consectetur. Curabitur
-            pretium fringilla neque, vitae cursus massa auctor vitae. Integer
-            non massa sit amet lacus accumsan blandit. Vivamus fermentum tellus
-            at justo iaculis eu tempus lorem venenatis. Suspendisse quis eros
-            consectetur tellus posuere commodo. In hac habitasse platea
-            dictumst.
-          </p>
-          <br/>
-          <p>
-            Praesent orci quam, ornare sed scelerisque ac, porta a justo.
-            Pellentesque quis magna sed magna vehicula semper ac ut enim. Duis
-            ut mattis ligula. Mauris at sem elit. Vestibulum justo tortor,
-            malesuada non tincidunt quis, feugiat ut metus. Maecenas varius
-            neque ut diam ultrices scelerisque. Praesent lectus massa, tincidunt
-            vel adipiscing non, vehicula ut magna. Cras quis lacinia ipsum. Sed
-            consequat consectetur volutpat. Integer sed tortor risus. Donec
-            accumsan ante vel justo porttitor volutpat.
-          </p>
-        </div>
-      </article>
-      <article>
-        <div class="article-header">
-          <h1 class="article-title">HTML5 응용과 실습</h1>
-          <p class="article-date">2013년 02월 17일</p>
-        </div>
-        <div class="article-body">
-          <img src="@/assets/images/iphone.png"/>
-          <br/>
-          <br/>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            commodo justo ac lorem pretium vitae rhoncus lectus ullamcorper.
-            Aliquam facilisis euismod diam sollicitudin commodo. Nunc sagittis
-            sapien venenatis lorem vestibulum cursus pellentesque mi sodales.
-            Donec pellentesque hendrerit turpis, vitae tempor nibh ultricies at.
-            Aliquam consequat rutrum erat, vel sodales tellus sagittis at. Proin
-            sollicitudin augue eu augue vehicula vitae bibendum odio porta.
-            Aliquam elit arcu, venenatis in imperdiet ut, scelerisque non dolor.
-            Donec in vulputate tortor. Fusce egestas rutrum mi quis ultricies.
-            Vivamus blandit augue ac felis ullamcorper consectetur. Curabitur
-            pretium fringilla neque, vitae cursus massa auctor vitae. Integer
-            non massa sit amet lacus accumsan blandit. Vivamus fermentum tellus
-            at justo iaculis eu tempus lorem venenatis. Suspendisse quis eros
-            consectetur tellus posuere commodo. In hac habitasse platea
-            dictumst.
-          </p>
-          <br/>
-          <p>
-            Praesent orci quam, ornare sed scelerisque ac, porta a justo.
-            Pellentesque quis magna sed magna vehicula semper ac ut enim. Duis
-            ut mattis ligula. Mauris at sem elit. Vestibulum justo tortor,
-            malesuada non tincidunt quis, feugiat ut metus. Maecenas varius
-            neque ut diam ultrices scelerisque. Praesent lectus massa, tincidunt
-            vel adipiscing non, vehicula ut magna. Cras quis lacinia ipsum. Sed
-            consequat consectetur volutpat. Integer sed tortor risus. Donec
-            accumsan ante vel justo porttitor volutpat.
-          </p>
-        </div>
-      </article>
+    <!-- Header-->
+    <HeaderCom></HeaderCom>
+    <SectionCom></SectionCom>
+    <!-- Map-->
+    <div class="map" id="contact">
+      <iframe
+          src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
+      <br/>
+      <small><a
+          href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a></small>
     </div>
+    <!-- Footer-->
+    <FooterCom></FooterCom>
 
-    <!--      <section id="main-section">-->
-
-    <!--      </section>-->
   </div>
+
 </template>
 
 <script>
+// 다운로드 받은 bootstrap 테마 js 적용
+import loadWin from "@/assets/js/scripts"
+import HeaderCom from "@/components/home/HeaderCom";
+import FooterCom from "@/components/home/FooterCom";
+import SectionCom from "@/components/home/SectionCom";
 
 export default {
-  data() {
-    return {
-      isShow: false,
-      isShow02: false,
-      isShow03: false
-    }
+  name: 'HomeView',
+  components: {SectionCom, HeaderCom, FooterCom},
+  comments: {
+    HeaderCom,
+    FooterCom,
+    SectionCom
+  },
+
+  mounted() {
+    loadWin();
   }
 }
 </script>
+
+<style>
+@import "../assets/css/styles.css";
+</style>

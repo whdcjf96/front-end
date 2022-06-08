@@ -10,17 +10,17 @@ const routes = [
   {
     path: '/tutorials',
     name: 'tutorials',
-    component: () => import('@/components/TutorialsList')
+    component: () => import('@/components/tutorials/TutorialsList')
   },
   {
     path: '/tutorials/:id',
     name: 'tutorials-details',
-    component: () => import('@/components/Tutorial')
+    component: () => import('@/components/tutorials/Tutorial')
   },
   {
     path: '/add',
     name: 'add',
-    component: () => import('@/components/AddTutorial')
+    component: () => import('@/components/tutorials/AddTutorial')
   },
   {
     path: '/complain',
@@ -37,7 +37,28 @@ const routes = [
     alias:'/home',
     name: 'home',
     component: () => import('@/views/HomeView')
-  }
+  },
+  {
+    path: '/customers',
+    name: 'customers',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '@/components/customer/CustomerList')
+  },
+  {
+    path: '/cadd',
+    name: 'cadd',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '@/components/customer/AddCustomer')
+  },
+  {
+    path: '/customers/:id',
+    name: 'edit-customer',
+    component: () => import('@/components/customer/EditCustomer')
+  },
 ]
 
 const router = new VueRouter({
