@@ -1,65 +1,109 @@
 <template>
   <div class="list row">
-<!--    search 관련 div 시작-->
     <div class="col-md-8">
       <div class="input-group mb-3">
-<!--        검색 입력 박스-->
-        <input type="text" class="form-control" placeholder="Search by title" v-model="title">
-<!--        검색 버튼-->
+        <!--        Todo: 수정 시작 #1 -->
+        <input
+            type="text"
+            class="form-control"
+            placeholder="Search by title"
+            v-model="searchTitle"
+        />
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" @click="searchTitle">
+          <button
+              class="btn btn-outline-secondary"
+              type="button"
+              @click="
+                            page = 1;
+                            retrieveTutorials();
+                        "
+          >
             Search
           </button>
         </div>
+        <!--        Todo : 수정 끝 #1 -->
       </div>
     </div>
-<!--    search 관련 div 끝-->
 
-<!--    목록을 보여주는 div 시작-->
-    <div class="col-md-6">
-        <h4>Tutorials List</h4>
-<!--      제목 목록-->
-        <ul class="list-group">
-          <li class="list-group-item" :class="{ active: index == currentIndex }"
-            v-for="(tutorial, index) in tutorials"
-              :key = "index"
-            @click="setActiveTutorial(tutorial,index)">{{ tutorial.title }}</li>
-        </ul>
-<!--      모든 목록 삭제 버튼-->
-        <button class="m-3 btn btn-sm btn-danger" @click="removeAllTutorial">
-          Remove All
-        </button>
+    <!--    Todo : page 바 태그 추가 -->
+    <div class="col-md-12">
+      <div class="mb-3">
+        Items per Page:
+        <select
+            v-model="pageSize"
+            @change="handlePageSizeChange($event)"
+        >
+          <option v-for="size in pageSizes" :key="size" :value="size">
+            {{ size }}
+          </option>
+        </select>
+      </div>
+
+      <!--      Todo : page bar 추가-->
+      <b-pagination
+          v-model="page"
+          :total-rows="count"
+          :per-page="pageSize"
+          prev-text="Prev"
+          next-text="Next"
+          @change="handlePageChange"
+      >
+      </b-pagination>
     </div>
-<!--    목록을 보여주는 div 끝-->
+    <!--    Todo : page 바 끝-->
 
-<!--    상세 정보를 보여주는 div 시작-->
+    <div class="col-md-6">
+      <h4>Tutorials List</h4>
+      <ul class="list-group">
+        <li
+            class="list-group-item"
+            :class="{ active: index == currentIndex }"
+            v-for="(tutorial, index) in tutorials"
+            :key="index"
+            @click="setActiveTutorial(tutorial, index)"
+        >
+          {{ tutorial.title }}
+        </li>
+      </ul>
+
+      <button
+          class="m-3 btn btn-sm btn-danger"
+          @click="removeAllTutorials"
+      >
+        Remove All
+      </button>
+    </div>
     <div class="col-md-6">
       <div v-if="currentTutorial">
         <h4>Tutorial</h4>
         <div>
-            <label><strong>Title:</strong></label>
-          {{currentTutorial.title}}
+          <label><strong>Title:</strong></label>
+          {{ currentTutorial.title }}
         </div>
         <div>
           <label><strong>Description:</strong></label>
-          {{currentTutorial.description}}
+          {{ currentTutorial.description }}
         </div>
         <div>
           <label><strong>Status:</strong></label>
-          {{(currentTutorial.published == "Y") ? "Published" : "Pending"}}
+          {{
+            currentTutorial.published == "Y"
+                ? "Published"
+                : "Pending"
+          }}
         </div>
-<!--        Link 추가-->
-        <router-link :to="'/tutorials/' + currentTutorial.id" class="badge badge-primary">
-          Edit
-        </router-link>
+
+        <router-link
+            :to="'/tutorials/' + currentTutorial.id"
+            class="badge badge-primary"
+        >Edit</router-link
+        >
       </div>
-<!--      currentTutorial == null이면-->
       <div v-else>
-        <br>
+        <br />
         <p>Please click on a Tutorial...</p>
       </div>
     </div>
-<!--    상세 정보를 보여주는 div 끝-->
   </div>
 </template>
 
@@ -67,83 +111,132 @@
 import TutorialDataService from "@/services/TutorialDataService";
 
 export default {
-  name : "toturials-list",
-  data(){
-    return{
-      tutorials:[],
-      currentTutorial:null,
+  name: "tutorials-list",
+  data() {
+    return {
+      tutorials: [],
+      currentTutorial: null,
       currentIndex: -1,
-      title: ""
-    }
+      // Todo : title -> searchTitle 변경
+      searchTitle: "",
+      //  Todo : 아래 변수 4개 추가
+      page: 1, // 페이지번호
+      count: 0,
+      // pageSize : 한페이지당 건수
+      pageSize: 3,
+      pageSizes: [3, 6, 9], // 한페이지당 건수(3, 6, 9건수)
+    };
   },
-  methods:{
-      //전체 목록 조회 메소드
-      retrieveTutorials(){
-        //백앤드 쪽으로 전체 데이터 요청
-        TutorialDataService.getAll()
-      //  성공하면 then으로 들어옴
-            //      response : 헤더(상태정보, 쿠키 등), 바디(json)
-            //  data : tutorial 객체(백엔드에서 전송됨)
-            .then(response => {
-                this.tutorials = response.data;
-                //데이터가 잘 들어왔는지 로그 확인
-                console.log("response.data : ", response.data);
-            }).catch(e=>{
-              console.log(e);
-        })
-      },
-      //목록 삭제 후 화면 다시 로딩할때 사용할 메소드(새로고침)
-      refreshList(){
-        this.currentTutorial=null;
-        this.currentIndex= -1;
-        this.retrieveTutorials();
-      },
-      // vue의 data 변수에 값을 저장하는 메소드
-      // 클릭했을때 저장함(@click 이벤트)
-      setActiveTutorial(tutorial, index){
-        this.currentTutorial=tutorial;
-        this.currentIndex=index;
-      },
+  methods: {
+    // Todo : getRequestParams 추가
+    // springboot 쪽으로 URL params 전송
+    // ex) http://localhost:8000/api/tutorials?title=''&page=1&size=3
+    getRequestParams(searchTitle, page, pageSize) {
+      let params = {};
 
-      //모든 목록 삭제 메소드
-      removeAllTutorial(){
-        // 백엔드쪽으로 전체 데이터 삭제 요청
-        TutorialDataService.deleteAll()
-            .then(response => {
-              console.log(response.data);
-              // 모든 데이터 삭제했으므로 새로고침 메소드 호출
-              this.refreshList();
-            }).catch(e => {
-              console.log(e);
-        })
-      },
+      // searchTitle 값이 있으면 params객체에 title로 저장
+      if (searchTitle) {
+        params["title"] = searchTitle;
+      }
+      // page 값이 있으면 params객체에 page 저장
+      if (page) {
+        params["page"] = page - 1;
+      }
+      // pageSize 값이 있으면 params객체에 size 저장
+      if (pageSize) {
+        params["size"] = pageSize;
+      }
 
-  //  제목 검색을 위한 메소드
-    searchTitle(){
-        // 백엔드 쪽으로 제목 데이터를 요청
-        TutorialDataService.findByTitle(this.title)
-            .then(response => {
-              //백엔드 쪽에서 받은 데이터를 vue의 date변수(tutorials)에 넣음
-              this.tutorials=response.data;
-              console.log(response.data);
-            }).catch(e => {
-              console.log(e);
-        })
-    }
+      return params;
+    },
+    // Todo : 아래 메소드 수정
+    // Todo : getAll() -> getAll(params)
+    retrieveTutorials() {
+      const params = this.getRequestParams(
+          this.searchTitle,
+          this.page,
+          this.pageSize
+      );
+      // Todo : 백엔드 쪽으로 전체 데이터 요청(페이징처리)
+      TutorialDataService.getAll(params)
+          //  성공하면 then 으로 결과데이터가 들어옴
+          .then((response) => {
+            // Todo : 아래 수정
+            // 임시변수 tutorials, totalItems(서버의 결과데이터가 들어옴)
+
+
+            const { tutorials, totalItems } = response.data;
+            this.tutorials = tutorials; // 객체
+            this.count = totalItems; // 총건수
+            alert(tutorials);
+            console.log(response.data);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+    },
+    // Todo : 메소드 2개 추가 , handlePageChange, handlePageSizeChange
+    // 역할 : 현재페이지번호에 해당하는 데이터 다시 조회
+    handlePageChange(value) {
+      // 페이지번호 저장
+      this.page = value;
+      // 다시 데이터 조회
+      this.retrieveTutorials();
+    },
+    // 역할 : 페이지당건수가 변경되면 다시 조회하는 메소드
+    handlePageSizeChange(event) {
+      // 한 페이지 당 건수 저장
+      this.pageSize = event.target.value; // 셀렉트박스 변경시 값 가져옴
+      this.page = 1;
+      // 다시 데이터 조회
+      this.retrieveTutorials();
+    },
+    refreshList() {
+      this.retrieveTutorials();
+      this.currentTutorial = null;
+      this.currentIndex = -1;
+    },
+
+    setActiveTutorial(tutorial, index) {
+      this.currentTutorial = tutorial;
+      this.currentIndex = index;
+      alert(tutorial);
+      alert(index);
+    },
+
+    removeAllTutorials() {
+      TutorialDataService.deleteAll()
+          .then((response) => {
+            console.log(response.data);
+            this.refreshList();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+    },
+    // Todo : searchTitle() 주석으로 막음 또는 삭제
+    //
+    // searchTitle() {
+    //   TutorialDataService.findByTitle(this.title)
+    //     .then(response => {
+    //       this.tutorials = response.data;
+    //       console.log(response.data);
+    //     })
+    //     .catch(e => {
+    //       console.log(e);
+    //     });
+    // }
   },
-  // 최초화면이 로딩될때 실행되는 이벤트
   mounted() {
-  //  전체 목록 가져오기 메소드 호출
     this.retrieveTutorials();
-
-  }
-}
+  },
+};
 </script>
 
 <style>
-  .list{
-    text-align: left;
-    max-width: 750px;
-    margin: auto;
-  }
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
 </style>

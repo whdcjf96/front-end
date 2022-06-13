@@ -11,8 +11,8 @@ import http from "../http-common";
 class TutorialDataService{
 //   tutorials 조회 메소드
 //    axios -> spring 데이터 요청 -> spring -> db -> 결과반환
-    getAll(){
-        return http.get("/tutorials");
+    getAll(params){
+        return http.get("/tutorials", {params});
     }
 
 //    id로 조회하는 메소드

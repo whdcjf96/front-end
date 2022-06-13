@@ -4,8 +4,8 @@ import http from '../http-common'
 // springboot 연결하기 위한 메소드 정의
 class CustomerDataService{
     // 모든 회원 조회
-    getAll(){
-        return http.get('/customers');
+    getAll(params){
+        return http.get('/customers',{params});
     }
 
 //    id로 회원 조회
