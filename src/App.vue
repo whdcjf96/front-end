@@ -46,6 +46,20 @@
 <!--            <a class="dropdown-item" href="#">Something else here</a>-->
           </div>
         </li>
+
+<!--        드롭다운 #4-->
+        <li class="nav-item dropdown mr-4">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Complain Menu
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <router-link to="/complainMenu" class="dropdown-item">ComplainList</router-link>
+            <router-link to="/cadd" class="dropdown-item">ComplainAdd</router-link>
+<!--            <div class="dropdown-divider"></div>-->
+<!--            <a class="dropdown-item" href="#">Something else here</a>-->
+          </div>
+        </li>
       </div>
       <!--      div끝-->
     </nav>

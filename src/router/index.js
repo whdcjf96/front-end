@@ -59,6 +59,21 @@ const routes = [
     name: 'edit-customer',
     component: () => import('@/components/customer/EditCustomer')
   },
+  {
+    path: '/complainMenu/:id',
+    name: 'edit-complain',
+    component: () => import('@/components/complain/EditComplain')
+  },
+  {
+    path: '/complainMenu',
+    name: 'complainMenu',
+    component: () => import('@/components/complain/ComplainList')
+  },
+  {
+    path: '/complainAdd',
+    name: 'complainAdd',
+    component: () => import('@/components/complain/AddComplain')
+  },
 ]
 
 const router = new VueRouter({
