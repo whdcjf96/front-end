@@ -60,7 +60,7 @@ const routes = [
     component: () => import('@/components/customer/EditCustomer')
   },
   {
-    path: '/complainMenu/:id',
+    path: '/complainMenu/:no',
     name: 'edit-complain',
     component: () => import('@/components/complain/EditComplain')
   },

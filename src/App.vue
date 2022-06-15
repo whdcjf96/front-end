@@ -55,7 +55,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <router-link to="/complainMenu" class="dropdown-item">ComplainList</router-link>
-            <router-link to="/cadd" class="dropdown-item">ComplainAdd</router-link>
+            <router-link to="/complainAdd" class="dropdown-item">ComplainAdd</router-link>
 <!--            <div class="dropdown-divider"></div>-->
 <!--            <a class="dropdown-item" href="#">Something else here</a>-->
           </div>

@@ -9,8 +9,8 @@ class ComplainDataService{
     }
 
 //    id로 회원 조회
-    get(id){
-        return http.get(`/complainMenu/${id}`);
+    get(no){
+        return http.get(`/complainMenu/${no}`);
     }
 
 //    회원 데이터를 생성(insert 문 호출)
@@ -19,13 +19,13 @@ class ComplainDataService{
     }
 
 //    회원 데이터를 수정 요청(update 문 호출)
-    update(id,data){
-        return http.put(`/complainUp/${id}`, data);
+    update(no,data){
+        return http.put(`/complainMenu/${no}`, data);
     }
 
 //    회원 데이터를 삭제 요청(update 문 호출)
-    delete(id){
-        return http.put(`/complainMenu/deletion/${id}`);
+    delete(no){
+        return http.put(`/complainMenu/deletion/${no}`);
     }
 }
 

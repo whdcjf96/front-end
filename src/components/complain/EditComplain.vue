@@ -16,13 +16,13 @@
     </div>
     <div class="mb-3">
       <label for="targetPage" class="form-label">
-        Email
+        TargetPage
       </label>
       <input type="text" class="form-control" id="targetPage" required name="targetPage" v-model="currentComplain.targetPage">
     </div>
     <div class="mb-3">
       <label for="writer" class="form-label">
-        Phone
+        writer
       </label>
       <input type="text" class="form-control" id="writer" required name="writer" v-model="currentComplain.writer">
     </div>
@@ -49,8 +49,8 @@ export default {
   },
   methods:{
     // id에 해당하는 회원정보를 조회하는 서비스를 요청(springboot)
-    getComplain(id){
-      ComplainDataService.get(id)
+    getComplain(no){
+      ComplainDataService.get(no)
           .then((response)=>{
             this.currentComplain = response.data;
           }).catch((e)=>{
@@ -81,7 +81,8 @@ export default {
   //http://localhost:8000/:id
   //$route : router/index.js, params.id
   mounted() {
-    this.getCustomer(this.$route.params.no);
+    alert(this.currentComplain);
+    this.getComplain(this.$route.params.no);
   }
 }
 </script>

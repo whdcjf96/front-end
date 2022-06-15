@@ -56,6 +56,8 @@
         <th scope="col">Content</th>
         <th scope="col">Target_Page</th>
         <th scope="col">Writer</th>
+        <th scope="col">edit</th>
+
       </tr>
       </thead>
       <!--      조회 데이터 생성 부분-->
@@ -63,11 +65,12 @@
              :key="index"
       >
       <tr>
-        <td>{{ complain.firstName }}</td>
-        <td>{{ complain.lastName }}</td>
-        <td>{{ complain.email }}</td>
-        <td>{{ complain.phone }}</td>
-        <td><a :href="'/customers/'+complain.id" class="btn btn-primary">Edit</a></td>
+        <td>{{ complain.no }}</td>
+        <td>{{ complain.title }}</td>
+        <td>{{ complain.content }}</td>
+        <td>{{ complain.targetPage }}</td>
+        <td>{{ complain.writer }}</td>
+        <td><a :href="'/complainMenu/'+complain.no" class="btn btn-primary">Edit</a></td>
       </tr>
       </tbody>
     </table>
